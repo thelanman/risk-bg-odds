@@ -1,10 +1,10 @@
-This script simulates one risk combat between one
+This script simulates one Risk boardgame combat between one
 attacker and one defender. It conducts 100k simulated
 combats to compute probability of attacker wining
 and the estimated number of armies remaining for each side
 after combat.
 
-=== Risk RULES ===
+# Risk Rules 
 Attacker Dice = min(Armies - 1, 3
 Defender Dice = min(Armies, 2)
 
@@ -13,10 +13,13 @@ Defender Dice = min(Armies, 2)
 3. Defender wins if it's Dice roll is equal or greater than attacker roll
 4. Subtract armies from each side based on how many die rolls won / lost
 
-=== USAGE ===
-python odds.py attacker_armies defender_armies
+# USAGE
+```sh
+$ python odds.py attacker_armies defender_armies
+```
 
-
-=== EXAMPLE ===
-python odds.py 8 3
+# EXAMPLE 
+```sh
+$ python odds.py 8 3
 Odds: 91.0% Attacker Rem: 5.7 Defender Rem: 0.2
+```
