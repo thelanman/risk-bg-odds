@@ -78,13 +78,38 @@ def odds(a, d, n=100000):
             a_wins += 1
     return a_wins / float(n), a_left_sum / float(n), d_left_sum / float(n)
 
+def sim_3v2(n=5000):
+    def sim():
+        attacker = [random.randint(1,6) for i in range(3)]
+        defender = [random.randint(1,6) for i in range(22)]
+        attacker.sort()
+        attacker = attacker[1:]
+        a_loss = 0
+        d_loss = 0
+        if attacker[0] > defender[0]:
+            d_loss += 1
+        else:
+            a_loss += 1
+        if attacker[1] > defender[1]:
+            d_loss += 1
+        else:
+            a_loss += 1
+        return a_loss, d_loss
+    a_total = 0
+    d_total = 0
+    for i in range(n):
+        a,d = sim()
+        a_total += a
+        d_total += d
+    print('Attacker Avg loss: %2.2f' % (a_total / float(n)))
+    print('Defender Avg loss: %2.2f' % (d_total / float(n)))
 
 if __name__ == '__main__':
     import sys
     if len(sys.argv) < 3:
-        print 'USAGE: python odds.py attacker_armies defender_army[ies]'
-        print 'EXAMPLE: python odds.py 15 11'
-        print '       : python odds.py 15 7 3 1'
+        print('USAGE: python odds.py attacker_armies defender_army[ies]')
+        print('EXAMPLE: python odds.py 15 11')
+        print('       : python odds.py 15 7 3 1')
         sys.exit()
     a = sys.argv[1]
     d = sys.argv[2:]
@@ -95,4 +120,4 @@ if __name__ == '__main__':
         o, al, dl = odds(a, d[0])
     else:
         o, al, dl = multi_odds(a, d)
-    print 'Odds: %2.1f%%  Attacker Rem: %2.1f  Defender Rem: %2.1f' % (o * 100, al, dl)
+    print('Odds: %2.1f%%  Attacker Rem: %2.1f  Defender Rem: %2.1f' % (o * 100, al, dl))
